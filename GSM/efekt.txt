@@ -1,0 +1,14 @@
+
+     /* 
+     unsigned int count2=0; 
+    //write_sent(2,&bufor_LCD[1],1);
+      for(count2;count2<40;count2++)
+      {
+          
+         write_sent(1,&bufor_LCD[count2],sizeof(bufor_LCD));
+         //_dp3;
+         wait();
+         
+      }
+      //getchar();
+    */

@@ -1,0 +1,53 @@
+ /*
+         case 'B':  LCD[position-1] = c + h + e;          LCD[position] = b + c + g;        break;  
+       case 'C':  LCD[position-1] = a + h;              LCD[position] = b + c;            break;  
+       case 'D':  LCD[position-1] = b + c + h + e;      LCD[position] = c + g;            break;     
+       case 'E':  LCD[position-1] = a + h + e;          LCD[position] = b + c + g;        break;  
+       case 'F':  LCD[position-1] = a;                  LCD[position] = b + c + g;        break;  
+       case 'G':  LCD[position-1] = a + c + h + e;      LCD[position] = b + c;            break; 
+       case 'H':  LCD[position-1] = b + c + e;          LCD[position] = b + c + g;        break;  
+       case 'I':  LCD[position-1] = a + h + f;          LCD[position] = d;                break;  
+       case 'J':  LCD[position-1] = b + h + c;          LCD[position] = c;                break;  
+       case 'K':  LCD[position-1] = d + g;              LCD[position] = b + c + g;        break;  
+       case 'L':  LCD[position-1] = h;                  LCD[position] = b + c ;           break;    
+       case 'M':  LCD[position-1] = b + c + g;          LCD[position] = b + c + f;        break;    
+       case 'N':  LCD[position-1] = b + c + d;          LCD[position] = b + c + f;        break;
+       case 'O':  LCD[position-1] = a + b + c + h;      LCD[position] = b + c;            break;
+       case 'P':  LCD[position-1] = a + b + e;          LCD[position] = b + c + g;        break;
+       case 'Q':  LCD[position-1] = a + b + c + h + d;  LCD[position] = b + c;            break;
+       case 'R':  LCD[position-1] = a + b + d + e;      LCD[position] = b + c + g;        break;
+       case 'S':  LCD[position-1] = a + c + h + e;      LCD[position] = b + g;            break;
+       case 'T':  LCD[position-1] = a + f + b;          LCD[position] = d + b;            break;
+       case 'U':  LCD[position-1] = b + c + h;          LCD[position] = b + c;            break;
+       case 'V':  LCD[position-1] = g;                  LCD[position] = b + c + e;        break;
+       case 'W':  LCD[position-1] = b + c + d;          LCD[position] = b + c + e;        break;
+       case 'X':  LCD[position-1] = d + g;              LCD[position] = e + f;            break;
+       case 'Y':  LCD[position-1] = b + c + h + e;      LCD[position] = f;                break;
+       case 'Z':  LCD[position-1] = a + h + g;          LCD[position] = e;                break;      
+       
+       // number  // LCDM7                              // LCDM8                          // END
+       case '0':  LCD[position-1] = a + b + c + h;      LCD[position] = b + c;            break;                            
+       case '1':  LCD[position-1] = b + c;                                                break; 
+       case '2':  LCD[position-1] = a + b + e + h;      LCD[position] = c + g;            break; 
+       case '3':  LCD[position-1] = a + b + c + e + h;  LCD[position] = g;                break; 
+       case '4':  LCD[position-1] = b + c + e;          LCD[position] = b + g;            break; 
+       case '5':  LCD[position-1] = a + c + h + e;      LCD[position] = b + g;            break; 
+       case '6':  LCD[position-1] = a + c + h + e;      LCD[position] = b + c + g;        break; 
+       case '7':  LCD[position-1] = a + b + c;                                            break;
+       case '8':  LCD[position-1] = a + b + c + e + h;  LCD[position] = b + c + g;        break; 
+       case '9':  LCD[position-1] =a + b + c + e ;      LCD[position] = b + g;            break; 
+       
+       // others
+       case '.':                                        LCD[position] = h;                break;  // decimal point
+       case '^':                                        LCDM2 = c;                        break;  // top arrow
+       case '!':                                        LCDM2 = a;                        break;  // bottom arrow
+       case '>':                                        LCDM2 = b;                        break;  // right arrow
+       case '<':                                        LCDM2 = h;                        break;  // left arrow
+       case '+':                                        LCDM20= a;                        break;  // plus sign
+       case '-':                                        LCDM20= h;                        break;  // minus sign
+       case '&':                                        LCDM2 = d;                        break;  // zero battery
+       case '*':                                        LCDM2 = d + f;                    break;  // low battery
+       case '(':                                        LCDM2 = d + f + g;                break;  // medium battery
+       case ')':                                        LCDM2 = d + e + f + g;            break;  // full battery */
+       
+       */

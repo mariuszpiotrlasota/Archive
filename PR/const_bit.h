@@ -1,0 +1,34 @@
+
+
+const unsigned int BIT0  = 0x00000001;
+const unsigned int BIT1  = 0x00000002;
+const unsigned int BIT2  = 0x00000004;
+const unsigned int BIT3  = 0x00000008;
+const unsigned int BIT4  = 0x00000010;
+const unsigned int BIT5  = 0x00000020;
+const unsigned int BIT6  = 0x00000040;
+const unsigned int BIT7  = 0x00000080;
+const unsigned int BIT8  = 0x00000100;
+const unsigned int BIT9  = 0x00000200;
+const unsigned int BIT10 = 0x00000400;
+const unsigned int BIT11 = 0x00000800;
+const unsigned int BIT12 = 0x00001000;
+const unsigned int BIT13 = 0x00002000;
+const unsigned int BIT14 = 0x00004000;
+const unsigned int BIT15 = 0x00008000;
+const unsigned int BIT16 = 0x00010000;
+const unsigned int BIT17 = 0x00020000;
+const unsigned int BIT18 = 0x00040000;
+const unsigned int BIT19 = 0x00080000;
+const unsigned int BIT20 = 0x00100000;
+const unsigned int BIT21 = 0x00200000;
+const unsigned int BIT22 = 0x00400000;
+const unsigned int BIT23 = 0x00800000;
+const unsigned int BIT24 = 0x01000000;
+const unsigned int BIT25 = 0x02000000;
+const unsigned int BIT26 = 0x04000000;
+const unsigned int BIT27 = 0x08000000;
+const unsigned int BIT28 = 0x10000000;
+const unsigned int BIT29 = 0x20000000;
+const unsigned int BIT30 = 0x40000000;
+const unsigned int BIT31 = 0x80000000;

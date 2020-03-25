@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<Workspace>
+  <ConfigDictionary>
+    
+    
+    
+  <CurrentConfigs/></ConfigDictionary>
+  <Desktop>
+    <Static>
+      <Workspace>
+        <ColumnWidths>
+          
+          
+          
+          
+        <Column0>155</Column0><Column1>0</Column1><Column2>27</Column2><Column3>14677140</Column3></ColumnWidths>
+      </Workspace>
+      <Build>
+        
+        
+        
+        
+      <PreferedWindows><Position>4</Position><ScreenPosX>5</ScreenPosX><ScreenPosY>862</ScreenPosY><Windows><Window><Factory>Debug-Log</Factory></Window></Windows></PreferedWindows><ColumnWidth0>20</ColumnWidth0><ColumnWidth1>916</ColumnWidth1><ColumnWidth2>244</ColumnWidth2><ColumnWidth3>61</ColumnWidth3></Build>
+    <TerminalIO/><Debug-Log><PreferedWindows><Position>4</Position><ScreenPosX>5</ScreenPosX><ScreenPosY>862</ScreenPosY><Windows><Window><Factory>Build</Factory></Window></Windows></PreferedWindows></Debug-Log></Static>
+    <Windows>
+      
+      
+    <Wnd1>
+        <Tabs>
+          <Tab>
+            <Identity>TabID-23641-27590</Identity>
+            <TabName>Workspace</TabName>
+            <Factory>Workspace</Factory>
+            <Session>
+              
+            <NodeDict/></Session>
+          </Tab>
+        </Tabs>
+        
+      <SelectedTab>0</SelectedTab></Wnd1><Wnd3><Tabs><Tab><Identity>TabID-32577-14141</Identity><TabName>Build</TabName><Factory>Build</Factory><Session/></Tab></Tabs><SelectedTab>0</SelectedTab></Wnd3></Windows>
+    <Editor>
+      
+      
+      
+      
+    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Regulator_v2.1\main.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>555</SelStart><SelEnd>555</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Regulator_v2.1\lcd_4b.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Regulator_v2.1\lcd_4b.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>2741</SelStart><SelEnd>2741</SelEnd></Tab><ActiveTab>2</ActiveTab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Regulator_v2.1\display.c</Filename><XPos>0</XPos><YPos>252</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Regulator_v2.1\delay.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Regulator_v2.1\program.c</Filename><XPos>0</XPos><YPos>9</YPos><SelStart>887</SelStart><SelEnd>887</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Regulator_v2.1\program.h</Filename><XPos>0</XPos><YPos>15</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Regulator_v2.1\1wire.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>792</SelStart><SelEnd>792</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Regulator_v2.1\1wire.h</Filename><XPos>0</XPos><YPos>24</YPos><SelStart>35</SelStart><SelEnd>79</SelEnd></Tab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
+    <Positions>
+      
+      
+      
+      
+      
+    <Top><Row0><Sizes><Toolbar-00abbc20><key>iaridepm.enu1</key></Toolbar-00abbc20></Sizes></Row0></Top><Left><Row0><Sizes><Wnd1><Rect><Top>-2</Top><Left>-2</Left><Bottom>848</Bottom><Right>202</Right><x>-2</x><y>-2</y><xscreen>-3427737</xscreen><yscreen>-1873551</yscreen><sizeHorzCX>-2142335624</sizeHorzCX><sizeHorzCY>-1665378666</sizeHorzCY><sizeVertCX>127500</sizeVertCX><sizeVertCY>755556</sizeVertCY></Rect></Wnd1></Sizes></Row0></Left><Right><Row0><Sizes/></Row0></Right><Bottom><Row0><Sizes><Wnd3><Rect><Top>-2</Top><Left>-2</Left><Bottom>233</Bottom><Right>1602</Right><x>-2</x><y>-2</y><xscreen>1604</xscreen><yscreen>235</yscreen><sizeHorzCX>1002500</sizeHorzCX><sizeHorzCY>208889</sizeHorzCY><sizeVertCX>156250</sizeVertCX><sizeVertCY>208889</sizeVertCY></Rect></Wnd3></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
+  </Desktop>
+</Workspace>
+
+

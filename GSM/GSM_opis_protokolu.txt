@@ -1,0 +1,123 @@
+TELEFON ULA:783428224 plus >>ZAKODOWANY 87438222F4
+TELEFON tat:513549221 IDEA >>ZAKODOWANY 15539422F1
+//****************ODEBRANE SMS'y z Bramki orange
+Centrum orange: 8405210077f7 ( rzeczywista 48501200777)
+dlugoœæ pola numeru Centrum: 07 
+typ us³ugi-miedzynarodowa  : 91 
+numer centrali             : 8405210077F7 
+zwracane przez cenrale     : 04
+dlugosc numeru dzwoniacego : 0D 
+numer dzwoniacy            : 85010249296405F5 
+ident. protokolu           : 39
+schemat kodowania          : 00     //00-7bitowe F6-8bitowe
+znacznik czasu             : 80017032003308 
+d³ugoœæ otrzymanego sms'a  : 01D
+Wiadomosc sms              : 4F22080683C160AA27199E9EEB41FAB03CAC57E9AE496A501902
+
+
+//********************************************ZAPIS DO PAMIECI SIM
+ if((P2IN&sw_escape)==0x00)
+     {    //zapisanie sms do SIM karty
+             putstr("at+cpms=");puthex(cudz); putstr("SM"); puthex(cudz);putstr("\n");wait(); wait(); wait(); wait(); wait(); wait(); wait(); wait(); wait(); wait(); wait(); wait();
+             putstr("at+cmgw=19,2\n");
+             wait(); wait(); wait(); wait(); wait(); wait(); wait(); wait(); wait(); wait(); wait(); wait();
+            // putstr("07918405210077f711000b99187438222F40000c405d72435a804");//prawid³owy
+               putstr("07918405210077F7040D85010249296405F539008001703200330801D4F22080683C160AA27199E9EEB41FAB03CAC57E9AE496A501902");
+             //  putstr("07918405210077F711000b9187438222F40000c405d72435a80c01");
+	putchar(0x06);				
+	putchar(0x1A);				
+	putchar(0x0D);  wait2();wait2();putstr("at+cmss=1");
+     }
+     
+     if((P2IN&sw_enter)==0x00)
+     {  // putstr("at+cpms="); puthex(cudz); putstr("SM"); puthex(cudz);putstr("\n");
+      //  wait2();wait2();wait2();wait2();wait2();wait2();wait2();wait2();wait2();wait2();
+         putstr("at+cmss=1");
+         	//putchar(0x06);				
+				
+	putchar(0x0D); 
+      			
+           }
+           
+           
+           
+           
+  if((P2IN&sw_escape)==0x00){//zapisanie sms do SIM karty
+             putstr("at+cpms=");puthex(cudz); putstr("SM"); puthex(cudz);putstr("\n");
+             putstr("at+cmgw=19\n");
+          wait2();
+             while((IFG1 & URXIFG0))                     // czekaj na znak w buforze
+                while(RXBUF0 != '>');   //krec sie puki nie natrafisz na ten znak
+                  // putstr("07918405210077f711000b99187438222F40000c405d72435a804");//prawid³owy
+                    putstr("07918405210077F711000b9187438222F40000c405d72435a80c01");
+                     //putstr("07918405210077F7040D85010249296405F539008001703200330801D4F22080683C160AA27199E9EEB41FAB03CAC57E9AE496A501902");
+                     clr_RxBuf();       
+   	putchar(0x06);				
+	putchar(0x1A);				
+	putchar(0x0D);  
+     }
+//********************************************ZAPIS DO APARATU
+   if((P2IN&sw_escape)==0x00){  //dzia³a 8-ka
+        putstr("at+cmgs=8\n"); 
+       	  while((IFG1 & URXIFG0));                     // czekaj na znak w buforze
+            //while(RXBUF0 != '>');clr_RxBuf();    //krec sie puki nie natrafisz na ten znak
+             putstr("0791"); putstr(CENTRALA_idea); putstr("11000B91");
+             putstr(NUMER_Tato); putstr("00F68F08");
+             putstr(sms);
+             putchar(0x1A);				
+             putchar(0x0D); 
+             
+             wait2();wait2();wait2();
+         }
+     
+    
+      if((P2IN&sw_escape)==0x00)//dzia³a
+     {  	
+       putstr("at+cmgs=6\n");
+       while((IFG1 & URXIFG0));                     // czekaj na znak w buforze
+          while(RXBUF0 != '>');     //krec sie puki nie natrafisz na ten znak
+           putstr("07918405210077F711000B918487438222F400f68F06574954414A21");//8 bit
+           clr_RxBuf();             
+	//putchar(0x06);				
+	putchar(0x1A);				
+	putchar(0x0D); wait2();wait2();
+     }
+    
+    
+//****************************menu
+      if(flaga_menu==1)
+    { switch(licz)
+                     {
+                       case 1:                                        
+                         write_sent(1,LCD_MENU,sizeof(LCD_MENU));break;//MENU
+                       case 2: 
+                          write_sent(1,LCD_SIEC,sizeof(LCD_SIEC));putstr("at\n");break;//
+                       case 3:
+                          if((P1IN&GSM_state)==0x00) write_sent(1,LCD_GSM_off,sizeof(LCD_GSM_off));         //STAN  GSM'U ON/OFF
+                          if(!(P1IN&GSM_state)==0x00) write_sent(1,LCD_GSM_on,sizeof(LCD_GSM_on));  
+                          putstr("at+csq\n");
+                          break;
+                       case 4:
+                         write_sent(1,LCD_NUMER,sizeof(LCD_NUMER));putstr("at+cops?\n");break;                
+                       case 5:
+                         write_sent(1,LCD_GSM,sizeof(LCD_GSM));putstr("ate0\n");
+                         putstr("AT+CNMI=1,1,0,2\n");
+                         break;
+                       case 6:
+                         write_sent(1,LCD_MEM,sizeof(LCD_MEM));
+                         //putstr("at+cpms=");puthex(cudz); putstr("SM"); puthex(cudz);putstr("\n");  wait2();
+                         putstr("at+cmgd=1\n");wait2();putstr("at+cmgd=2\n");wait2();
+                         putstr("at+cmgd=3\n");wait2();putstr("at+cmgd=4\n");wait2();
+                         putstr("at+cmgd=5\n");wait2();putstr("at+cmgd=6\n");wait2();
+                         putstr("at+cmgd=7\n");wait2();putstr("at+cmgd=8\n");wait2();
+                         putstr("at+cpms=");puthex(cudz); putstr("SM"); puthex(cudz);
+                         putstr("\n");wait2();
+                         putstr("at+clip=1\n");wait2();
+                         break;
+                     }
+                  flaga_menu=0;
+    } ;   
+    
+                           
+    if((P2IN&sw_up)==0x00){++licz; flaga_menu=1; wait();wait();wait();wait();}
+    if((P2IN&sw_down)==0x00){--licz; flaga_menu=1; wait();wait();wait();wait();}

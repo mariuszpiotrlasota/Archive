@@ -1,0 +1,27 @@
+Removed Pin From Net: NetName=GND Pin=P7-1
+Removed Pin From Net: NetName=3V3 Pin=P7-2
+Removed Pin From Net: NetName=IN_1 Pin=P7-3
+Removed Pin From Net: NetName=IN_2 Pin=P7-4
+Removed Pin From Net: NetName=IN_3 Pin=P7-5
+Removed Pin From Net: NetName=IN_4 Pin=P7-6
+Removed Pin From Net: NetName=IN_5 Pin=P7-7
+Removed Pin From Net: NetName=IN_6 Pin=P7-8
+Removed Pin From Net: NetName=3V3 Pin=P7-9
+Removed Pin From Net: NetName=GND Pin=P7-10
+Removed Member From Class: ClassName=sterowanie_v1_1 Member=P7
+Added Component: Designator=D1(SMB)
+Added Component: Designator=P1(HDR1X8)
+Added Pin To Net: NetName=3V3 Pin=D1-2
+Added Pin To Net: NetName=GND Pin=P1-1
+Added Pin To Net: NetName=IN_1 Pin=P1-3
+Added Pin To Net: NetName=IN_2 Pin=P1-4
+Added Pin To Net: NetName=IN_3 Pin=P1-5
+Added Pin To Net: NetName=IN_4 Pin=P1-6
+Added Pin To Net: NetName=IN_5 Pin=P1-7
+Added Pin To Net: NetName=IN_6 Pin=P1-8
+Added Pin To Net: NetName=NetD1_1 Pin=D1-1
+Added Pin To Net: NetName=NetD1_1 Pin=P1-2
+Added Net: Name=NetD1_1
+Added Member To Class: ClassName=sterowanie_v1_1 Member=Component D1 D Schottky
+Added Member To Class: ClassName=sterowanie_v1_1 Member=Component P1 Header 8
+Added Room: Name=sterowanie_v1_1

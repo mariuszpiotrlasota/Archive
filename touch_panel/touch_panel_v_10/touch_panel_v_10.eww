@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<workspace>
+  <project>
+    <path>$WS_DIR$\..\test\proj.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\touch_panel_v_10.ewp</path>
+  </project>
+  <batchBuild/>
+</workspace>
+
+

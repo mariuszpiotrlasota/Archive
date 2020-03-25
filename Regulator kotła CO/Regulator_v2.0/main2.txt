@@ -1,0 +1,476 @@
+/*;****************************************************************************
+;    
+
+
+;
+;******************************************************************************
+*/
+
+#include  <msp430x13x.h>
+
+#define D8    BIT7//P1,7
+#define D7    BIT6//P1,6
+#define D6    BIT5//P1,5
+#define D5    BIT4//P1.4
+#define E     BIT2//P1,2
+#define RS    BIT1//P1,1
+
+
+#define   E_HIGH          P1OUT |= BIT2
+#define   E_LOW           P1OUT &= ~BIT2
+#define   RS_HIGH         P1OUT |= BIT1
+#define   RS_LOW          P1OUT &= ~BIT1
+#define   LCD_Data        P1OUT
+#define   LCD_LIGHT_ON    P1OUT |= BIT0
+#define   LCD_LIGHT_OFF   P1OUT &= ~BIT0
+
+#define   INPUT           0
+#define   OUTPUT          0xff
+#define   ON              1
+#define   OFF             0
+#define   BUF_SIZE        25
+
+#define   _100us     7                 //7 cycles *12 + 20 = 104 / 104*1us = 104us
+
+//LCD commands
+#define		DISP_ON			0x0c	        //LCD control constants
+#define		DISP_OFF		0x08	        //
+#define		CLR_DISP		0x01    	//
+#define		CUR_HOME		0x02	        //
+#define		ENTRY_INC		0x06            //
+#define		DD_RAM_ADDR		0x80	        //
+#define		DD_RAM_ADDR2		0xc0	        //
+#define		DD_RAM_ADDR3		0x28	        //
+#define		CG_RAM_ADDR		0x40	        //
+
+//NAND FLASH 
+#define MAX_BLOCK_NUMB		1024
+
+#define TRANS_LDY 		50
+#define WRITE_DLY		400
+#define ERASE_DLY		4000
+
+#define OUT_PORT		P5OUT
+#define IN_PORT		        P5IN
+#define IO_DIR			P5DIR
+
+#define _CE_ON			P2OUT &= ~BIT0
+#define _CE_OFF			P2OUT |= BIT0
+#define _RE_ON			P2OUT &= ~BIT1
+#define _RE_OFF			P2OUT |= BIT1
+#define _WE_ON			P2OUT &= ~BIT2
+#define _WE_OFF			P2OUT |= BIT2
+
+#define ALE_ON			P1OUT |= BIT1
+#define ALE_OFF			P1OUT &= ~BIT1
+#define CLE_ON			P1OUT |= BIT2
+#define CLE_OFF			P1OUT &= ~BIT2
+
+#define R_B                     P2IN & BIT7
+#define DALLAS                  P2IN & BIT5
+
+#define READ_SPARE			0x50
+#define READ_0				0x00
+#define READ_1				0x01
+#define READ_STATUS			0x70
+
+#define WRITE_PAGE			0x80
+#define WRITE_AKN			0x10
+
+#define ERASE_BLOCK			0x60
+#define	ERASE_AKN			0xD0
+
+#define DEV_ID				0x90
+
+#define SAMSUNG_ID			0xECE6
+
+
+unsigned char i, proba, temp, test, count;
+unsigned char b1_flag, b2_flag, b3_flag, dls_flag;
+
+const unsigned char LCD_Message[] = " MSP430-169 stk  by OLIMEX Ltd. ";
+const unsigned char ERASE_SUCCESS_Message[] = "ERASE SUCCESSFUL";
+const unsigned char ERASE_ERR_Message[] = "  ERASE  ERROR  ";
+const unsigned char PGM_SUCCESS_Message[] = " PGM SUCCESSFUL ";
+const unsigned char PGM_ERROR_Message[] = " PROGRAMM ERROR ";
+const unsigned char DALLAS_PRESENT_Message[] = " DALLAS PRESENT ";
+const unsigned char SAVE_RS232_Message[] = "SAVE RS232 SIGNS";
+const unsigned char DYSPLAY_RS232_Message[] = "DYSPLAY to RS232";
+unsigned char WRITE_BUF [BUF_SIZE];
+unsigned char READ_BUF [BUF_SIZE];
+
+// Function prototypes
+
+void Delay (unsigned int a);
+void Delayx100us(unsigned char b);
+void _E(void);
+void SEND_CHAR (unsigned char d);
+void SEND_CMD (unsigned char e);
+void InitLCD(void);
+void Write_Data(unsigned char a);
+unsigned char Programm_Bytes(unsigned char COL_ADD,                          
+                             unsigned char ROW_ADDL,
+                             unsigned char ROW_ADDH,                             
+                             unsigned char NUMBER);   
+unsigned char Read_Data(void);      
+void Read_Bytes (unsigned char COL_ADD,                          
+                 unsigned char ROW_ADDL,
+                 unsigned char ROW_ADDH,                             
+                 unsigned char NUMBER);                                                 
+unsigned char Erase_Flash (unsigned char BLOCK_ADDL, unsigned char BLOCK_ADDH);
+
+
+
+
+
+//PULL_PIN is P2.0
+
+void main(void)
+{ 
+  WDTCTL = WDTPW + WDTHOLD; // Stop watchdog timer
+  P1DIR=0XFF;
+
+
+  InitLCD();
+
+ // count=0;
+
+/*
+  for (i=0; i!=32; i++)  
+    {
+      SEND_CHAR(LCD_Message[i]);
+      if (i==15) SEND_CMD (DD_RAM_ADDR2);
+    }  
+      
+  SEND_CMD(DD_RAM_ADDR);      
+ */
+  while(1)                   //Repeat forever  
+  {
+    SEND_CHAR('A');
+    Delayx100us(100); 
+  }
+}
+ 
+ 
+  
+
+//---Functions difinitions------------------
+ 
+void Delay (unsigned int a)
+{
+  unsigned char k;
+  for (k=0 ; k != a; ++k);                      //20+a*12 cycles (for 1MHz)
+}
+
+void Delayx100us(unsigned char b)
+{
+  unsigned char j;
+  for (j=0; j!=b; ++j) Delay (_100us);
+}
+
+void _E(void)
+{
+        E_HIGH;		    //toggle E for LCD
+	_NOP();
+	_NOP();
+	E_LOW;
+}
+
+void SEND_CHAR (unsigned char d)
+{
+	Delayx100us(5);                 //.5ms	
+	temp = d & 0xf0;		//get upper nibble	
+	LCD_Data &= 0x0f;
+	LCD_Data |= temp;               
+	RS_HIGH;        	        //set LCD to data mode
+	_E();                           //toggle E for LCD
+	temp = d & 0x0f;
+	temp = temp << 4;               //get down nibble
+	LCD_Data &= 0x0f;
+	LCD_Data |= temp;
+	RS_HIGH;   	                //set LCD to data mode
+	_E();                           //toggle E for LCD
+}
+
+void SEND_CMD (unsigned char e)
+{
+	Delayx100us(10);                //10ms
+	temp = e & 0xf0;		//get upper nibble	
+	LCD_Data &= 0x0f;
+	LCD_Data |= temp;               //send CMD to LCD
+	RS_LOW;     	                //set LCD to CMD mode
+	_E();                           //toggle E for LCD
+	temp = e & 0x0f;
+	temp = temp << 4;               //get down nibble
+	LCD_Data &= 0x0f;
+	LCD_Data |= temp;
+	RS_LOW;            	        //set LCD to CMD mode
+	_E();                           //toggle E for LCD
+}
+
+void InitLCD(void)
+{
+    Delayx100us(250); 
+    RS_LOW;
+    Delayx100us(250);                   //Delay 100ms
+    Delayx100us(250);
+    Delayx100us(250);    
+    Delayx100us(250);   
+    LCD_Data |= BIT4 | BIT5;            //D7-D4 = 0011
+    LCD_Data &= ~BIT6 & ~BIT7;
+    _E();                               //toggle E for LCD
+    Delayx100us(100);                   //10ms
+    _E();                               //toggle E for LCD
+    Delayx100us(100);                   //10ms
+    _E();                               //toggle E for LCD
+    Delayx100us(100);                   //10ms
+    LCD_Data &= ~BIT4;                  //D7-D4 = 0010
+    _E();                               //toggle E for LCD
+    
+    SEND_CMD(DISP_ON);
+    SEND_CMD(CLR_DISP);   
+    SEND_CMD(DD_RAM_ADDR);
+}
+
+
+
+void Write_Data(unsigned char a)
+{
+  IO_DIR=OUTPUT;        //IO is outputs
+  _WE_ON;
+  OUT_PORT=a;  
+  _WE_OFF;              //latch data
+}
+
+unsigned char Read_Data(void)
+{
+  unsigned char f;
+  IO_DIR=INPUT;         //IO is inputs
+  _RE_ON;
+  f=IN_PORT;
+  _RE_OFF;              //read data  
+  return (f);
+}
+
+unsigned char Programm_Bytes(unsigned char COL_ADD,                          
+                             unsigned char ROW_ADDL,
+                             unsigned char ROW_ADDH,                             
+                             unsigned char NUMBER)                             
+{       
+        unsigned char k, l;        
+   
+	CLE_ON;
+	_CE_ON;	
+	Write_Data(WRITE_PAGE);
+	CLE_OFF;
+	ALE_ON;
+        Write_Data(COL_ADD);
+        Write_Data(ROW_ADDL);
+        Write_Data(ROW_ADDH);
+        ALE_OFF;
+        for (k=0; k != NUMBER; k++)
+          {
+             l=WRITE_BUF[k];
+             Write_Data(l);
+          }
+        CLE_ON;
+        Write_Data(WRITE_AKN);          
+        while ((R_B) == 0);
+        Write_Data(READ_STATUS);
+        CLE_OFF;
+        l = Read_Data();
+     
+        return(l);                
+}
+
+
+
+
+
+//**********************
+//////////////////////////////////////////////////////////////////////////////////////////////////
+// LCD_simple.c - plik pokazuj¹cy prost¹ obs³ugê wyœwietlacza alfanumerycznego LCD
+// 
+// Autor: Rados³aw Koppel          Kompilator: WinAVR 20050214
+//////////////////////////////////////////////////////////////////////////////////////////////////
+// Komentarz dodatkowy:
+//  Pierwsza wersja. Za³o¿enie, ¿e wyprowadzenia portu podpiêto "po koleji"
+//  Brak wygodnych komend, wszystko realizowane na doœæ niskim poziomie. 
+//////////////////////////////////////////////////////////////////////////////////////////////////
+#include <avr\io.h>
+#include <inttypes.h>
+
+// Makra upraszczaj¹ce dostêp do portów
+// *** Port
+#define PORT(x) XPORT(x)
+#define XPORT(x) (PORT##x)
+// *** Pin
+#define PIN(x) XPIN(x)
+#define XPIN(x) (PIN##x)
+// *** DDR
+#define DDR(x) XDDR(x)
+#define XDDR(x) (DDR##x)
+
+// Definicje wyprowadzeñ
+#define LCD_RS 2
+#define LCD_RSPORT B
+#define LCD_E 1
+#define LCD_EPORT B
+// Port danych: zak³adam, ¿e wyprowadzenia s¹ po³¹czone kolejno. 
+// Definiowane jest jedynie przesuniêcie oznaczaj¹ce na którym wyprowadzeniu jest D4
+#define LCD_DPORT B
+#define LCD_D4 4 // D5, D6, D7 - po³¹czone kolejno
+
+// Komendy steruj¹ce wyœwietlaczem
+#define LCDC_CLS		0x01
+#define LCDC_HOME		0x02
+#define LCDC_MODE		0x04
+	#define LCDC_MODER		0x02
+	#define LCDC_MODEL		0
+	#define LCDC_MODEMOVE	0x01
+#define LCDC_ON 		0x08
+	#define LCDC_ONDISPLAY	0x04
+	#define LCDC_ONCURSOR	0x02
+	#define LCDC_ONBLINK	0x01
+#define LCDC_SHIFT		0x10
+	#define LCDC_SHIFTDISP	0x08
+	#define LCDC_SHIFTR		0x04
+	#define LCDC_SHIFTL		0
+#define LCDC_FUNC		0x20
+	#define LCDC_FUNC8b		0x10
+	#define LCDC_FUNC4b		0
+	#define LCDC_FUNC2L		0x08
+	#define LCDC_FUNC1L		0
+	#define LCDC_FUNC5x10	0x4
+	#define LCDC_FUNC5x7	0
+#define LCDC_CGA		0x40
+#define LCDC_DDA		0x80
+
+//--------------------------------------------------
+// Generowanie opóŸnieñ
+#define delay250ns() {asm volatile("nop"::);}
+
+#define delayus8(t)\
+	{asm volatile( \
+		"delayus8_loop%=: \n\t"\
+			"nop \n\t"\
+			"dec %[ticks] \n\t"\
+			"brne delayus8_loop%= \n\t"\
+	: :[ticks]"r"(t) );}
+	// DEC - 1 cykl, BRNE 2 cykle, + 1xnop. Zegar 4MHz
+
+void delay100us8(uint8_t t)
+{
+	while(t>0)
+	{
+		delayus8(100); 
+		--t; 
+	}
+}
+// Koniec opóŸnieñ
+//--------------------------------------------------
+
+//--------------------------------------------------
+// Obs³uga wyœwietlacza
+// Funkcje niskiego poziomu
+#define LCD_EPULSE() \
+	{PORT(LCD_EPORT) |= 1<<LCD_E; \
+	delay250ns(); \
+	PORT(LCD_EPORT) &= ~(1<<LCD_E);}
+
+void LCDsendHalf(uint8_t data)
+{
+	data = (data & 0x0F) << LCD_D4; 
+	//data |= 0xF0;
+	//data &= 0x0F;
+	//data <<= LCD_D4; 
+	PORT(LCD_DPORT) = 
+		(PORT(LCD_DPORT) & ~(0x0F<<LCD_D4)) | data;
+	//PORT(LCD_DPORT) &= ~(0x0F<<LCD_D4); 
+	//PORT(LCD_DPORT) |= data; 
+	LCD_EPULSE();
+}
+
+void LCDsend(uint8_t data)
+{
+	// Starsza czêœæ
+	LCDsendHalf(data>>4);
+	// M³odsza czêœæ
+	LCDsendHalf(data);
+	delayus8(120);
+}
+
+// Funkcje interfejsu
+void LCDcommand(uint8_t command)
+{
+	PORT(LCD_RSPORT) &= ~(1<<LCD_RS);
+	LCDsend(command);
+}
+
+void LCDdata(uint8_t data)
+{
+	PORT(LCD_RSPORT) |= 1<<LCD_RS;
+	LCDsend(data);
+}
+
+void LCDcls(void)
+{
+	LCDcommand(LCDC_CLS);
+	delay100us8(48);
+}
+
+void LCDhome(void)
+{
+	LCDcommand(LCDC_HOME);
+	delay100us8(48);
+}
+
+void LCDinit(void)
+{
+	delay100us8(150);
+	PORT(LCD_RSPORT) &= ~(1<<LCD_RS);
+	LCDsendHalf(LCDC_FUNC|LCDC_FUNC8b); 
+	delay100us8(41);
+	LCDsendHalf(LCDC_FUNC|LCDC_FUNC8b);
+	delay100us8(2);
+	LCDsendHalf(LCDC_FUNC|LCDC_FUNC4b);
+	delay100us8(2);
+	// Teraz jest ju¿ 4b. Koniec korzystania z sendHalf
+	LCDcommand(LCDC_FUNC|LCDC_FUNC4b|LCDC_FUNC2L|LCDC_FUNC5x7);
+	LCDcommand(LCDC_ON);
+	LCDcls();
+	LCDcommand(LCDC_MODE|LCDC_MODER);
+	LCDcommand(LCDC_ON|LCDC_ONDISPLAY|LCDC_ONCURSOR);
+}
+
+// Koniec obs³ugi wyœwietlacza
+//--------------------------------------------------
+
+// START
+int main(void)
+{
+	//----------------------------------------------
+	// Inicjacja - uwaga: uproszczona, mo¿e wymagaæ 
+	// zmian przy zmianie przyporz¹dkowania portów
+	DDR(LCD_DPORT) = 1<<LCD_E | 1<<LCD_RS | 
+		0x0F<<LCD_D4;
+	
+	LCDinit();
+	// Koniec inicjacji
+	//----------------------------------------------
+	
+	// \/ Bez tego, czasami zerowanie z poziomu programatora
+	// \/ powoduje œmieci na wyœwietlaczu. 
+	LCDcls(); 
+	
+	LCDdata('H');
+	LCDdata('E');
+	LCDdata('L');
+	LCDdata('L');
+	LCDdata('O');
+	LCDdata(' ');
+	LCDdata(':');
+	LCDdata('-');
+	LCDdata(')');
+	return 0;
+}

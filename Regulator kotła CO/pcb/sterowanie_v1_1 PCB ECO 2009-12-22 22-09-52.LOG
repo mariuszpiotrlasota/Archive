@@ -1,0 +1,13 @@
+Added Component: Designator=C1(RAD-0.3)
+Added Component: Designator=F1(CAPR5-4X5)
+Added Component: Designator=R1(WARYSTOR)
+Added Pin To Net: NetName=N Pin=C1-2
+Added Pin To Net: NetName=L Pin=F1-1
+Added Pin To Net: NetName=N Pin=R1-1
+Added Pin To Net: NetName=NetC1_1 Pin=C1-1
+Added Pin To Net: NetName=NetC1_1 Pin=F1-2
+Added Pin To Net: NetName=NetC1_1 Pin=R1-2
+Added Net: Name=NetC1_1
+Added Member To Class: ClassName=sterowanie_v1_1 Member=Component C1 Cap
+Added Member To Class: ClassName=sterowanie_v1_1 Member=Component F1 1,2A
+Added Member To Class: ClassName=sterowanie_v1_1 Member=Component R1 275V

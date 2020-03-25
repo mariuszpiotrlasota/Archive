@@ -1,0 +1,113 @@
+
+PLANOWANIE PINÓW DO EXPANDER PORT:(OUT)
+
+LP.	|	LED		| 	STATE
+------------------------------------------------
+	|	-		|	00000
+1	|	ROZPALANIE	|	00001
+2	|	PRACA		|	00010
+3	|	PODTRZYMANIE	|	00011
+4	|	ALARM		|	00100
+5	|	LED1/STER.KLAPA	|	00101
+6	|	LED2/STER.POMP1	|	00110
+7	|	LED3/STER.POMP2	|	00111
+8	|	LED4/STER.POMP3	|	01000
+9	|	DISP1.		|	10001
+10	|	DISP2.		|	10010
+11	|	DISP3.		|	10011
+12	|	DISP4.		|	10100
+13	|	sA		|	10101
+14	|	sB		|	10110
+15	|	sC		|	10111
+16	|	sD		|	11000
+17	|	sE		|	11001
+18	|	sF		|	11010
+19	|	sG		|	11011
+20	|	sDP		|	11100
+21	|	BUZER		
+
+IN:  2BITOW
+
+	
+ATMEGA88:24
+
+
+___________________________________________________
+
+
+
+STEROWANIE WYSWIETLACZEM :
+
+LP.	|	LED		|ST.[76543210]
+------------------------------------------------
+	|			|	 0000
+1	|	-		|	 0001
+2	|	0		|	 0010
+3	|	1		|	 0011
+4	|	2		|	 0100
+5	|	3		|	 0101
+6	|	4		|	 0110
+7	|	5		|	 0111
+8	|	6		|	 1000
+9	|	7		|	 1001
+10	|	8		|	 1010
+11	|	9		|	 1011
+12	|	DP		|	 1100
+13	|	P		|	 1101
+
+Wybor segmentu:
+dips1	
+dips2
+dips3
+dips4
+dips5
+
+
+
+WYBÓR SEGMENTU:
+26			DISP1.	       1----1 
+27			DISP2.	       1---1-
+28			DISP3.	       1--1--
+29			DISP4.	       1-1---
+
+PINY (liczenie):
+
+
+14	|	ROZPALANIE	|	10001
+15	|	PRACA		|	10010
+16	|	PODTRZYMANIE	|	10011
+17	|	ALARM		|	10100
+18	|	LED1		|	10101
+19	|	LED2		|	10110
+20	|	LED3		|	10111
+21	|	LED4		|	11000
+22	|	STER.KLAPA	|	11001
+23	|	STER.POMP1	|	11010
+24	|	STER.POMP2	|	11011
+25	|	STER.POMP3	|	11100
+
+
+	
+
+
+
+
+
+
+*MSP430F1232
+1	i2c		
+2	i2c
+3	buzzer
+4	sw1(on/off)	
+5	sw2(start)
+6	sw3(-)
+7	sw4(+)
+8	sw5(stop)
+9	sw6(P)
+10	1wire(ds18b20)
+	
+
+
+
+
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<workspace>
+  <project>
+    <path>$WS_DIR$\Regulator_v1.0\_v1.0.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\Regulator_v1.1\_v1.1.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\Regulator_v2.0\_v2.0.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\Regulator_v2.1\_v2.1.ewp</path>
+  </project>
+  <batchBuild/>
+</workspace>
+
+

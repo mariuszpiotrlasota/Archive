@@ -1,0 +1,115 @@
+#include  <msp430x44x.h>
+#define a BIT0
+#define b BIT1
+#define c BIT2
+#define d BIT3
+#define i BIT0
+#define j BIT1
+#define k BIT2
+#define l BIT3
+#define h BIT0
+#define g BIT1
+#define f BIT2
+#define e BIT3
+#define p BIT0
+#define o BIT1
+#define m BIT2
+#define n BIT3
+
+// **********************************************  cleardipsp ******************************************************** 
+void clean_disp(void)
+{
+  unsigned char x;
+    for (x=0; x<19; x++)
+    {
+      LCDMEM[x] = CLEAN;  
+    }
+}
+
+// **********************************************  cleardipsp ******************************************************** 
+void wait(void)
+{ unsigned int zmienna_x;
+   for (zmienna_x = 0; zmienna_x < 10000; zmienna_x++); 
+   { 
+     int zmienna_y;
+      for (zmienna_y = 0; zmienna_y < 10000; zmienna_y++);  
+      {
+
+      }
+   } 
+}
+// **********************************************  write ******************************************************** 
+void write(int position,char letter) // writes a single character on the LCD. User can specify position as well
+{
+  unsigned int segment1,segment2,segment3,segment4;
+  unsigned int move_seg1,move_seg2,move_seg3,move_seg4;
+  if(position==8 || position==7 || position==6)
+  {
+    segment1=(8-position);
+    segment2=(8+position);  //segmenty2....8
+    segment3=segment1;
+    segment4=segment2;
+    move_seg1=0;
+    move_seg2=0;  
+    move_seg3=4;
+    move_seg4=4;
+  }
+  else if(position==5||position==4||position==3||position==2)
+  {
+    segment1=(8-position);
+    segment3=(9-position);
+    segment2=(8+position);  //segmenty2....8  
+   // segment4=(18)
+    
+    move_seg1=4;
+    move_seg2=0;  
+    move_seg3=4; 
+    move_seg4=4;
+  }  
+  else if(position==1)
+  {
+    segment1=(8-position);//abcd
+    segment4=(9-position);//ijklhgfe
+    segment2=(10-position);//mnop 
+    move_seg1=4;
+    move_seg2=4; 
+    move_seg4=4; 
+  }
+/*
+segment1 = abcd
+segment2 = hgfe
+segment3 = ijkl
+segment4 = ponm
+*/  
+  switch(letter)
+  {             //abcs                                              hgfe                                                ijkl                  ponm
+      case '1':  LCDMEM[segment1]=(b+c)<<move_seg1;      break;
+      case '2':  LCDMEM[segment1]=(a+b+d)<<move_seg1;     LCDMEM[segment2]=(h+f+e)<<move_seg2;     LCDMEM[segment3]=(k)<<move_seg3;   LCDMEM[segment4]=(o)<<move_seg4;break;
+      case '3':  LCDMEM[segment1]=(a+b+c+d)<<move_seg1;   LCDMEM[segment2]=(e+h)<<move_seg2;       LCDMEM[segment3]=(k)<<move_seg3;   LCDMEM[segment4]=(o)<<move_seg4;break;
+      case '4':  LCDMEM[segment1]=(b+c)<<move_seg1;       LCDMEM[segment2]=(g)<<move_seg2;         LCDMEM[segment3]=(k)<<move_seg3;   LCDMEM[segment4]=(o)<<move_seg4;break;
+      case '5':  LCDMEM[segment1]=(a+c+d)<<move_seg1;     LCDMEM[segment2]=(h+g+e)<<move_seg2;     LCDMEM[segment3]=(k)<<move_seg3;   LCDMEM[segment4]=(o)<<move_seg4;break;
+      case '6':  LCDMEM[segment1]=(a+c+d)<<move_seg1;     LCDMEM[segment2]=(h+g+f+e)<<move_seg2;   LCDMEM[segment3]=(k)<<move_seg3;   LCDMEM[segment4]=(o)<<move_seg4;break;
+      case '7':  LCDMEM[segment1]=(a+b+c)<<move_seg1;     LCDMEM[segment2]=(h)<<move_seg2;         break;
+      case '8':  LCDMEM[segment1]=(a+b+c+d)<<move_seg1;   LCDMEM[segment2]=(e+f+g+h)<<move_seg2;   LCDMEM[segment3]=(k)<<move_seg3;   LCDMEM[segment4]=(o)<<move_seg4;break;
+      case '9':  LCDMEM[segment1]=(a+b+c+d)<<move_seg1;   LCDMEM[segment2]=(h+g+e)<<move_seg2;     LCDMEM[segment3]=(k)<<move_seg3;   LCDMEM[segment4]=(o)<<move_seg4;break;
+      case '0':  LCDMEM[segment1]=(a+b+c+d)<<move_seg1;   LCDMEM[segment2]=(e+f+g+h)<<move_seg2;   LCDMEM[segment3]=(k)<<move_seg3;   LCDMEM[segment4]=(o)<<move_seg4;break;
+     
+  }
+  
+  
+  //************************glowna petal swith
+    /*   switch(letter)
+      {//SEGMENT                               pomn
+      case '1':  LCDMEM[segment1]=(b+c)<<move_seg1;      break;
+      case '2':  LCDMEM[segment1]=(a+b+d+k)<<move_seg1;     LCDMEM[segment2]=(h+f+e+o)>>move_seg2;     LCDMEM[segment3]=(k)>>move_seg3;   LCDMEM[segment4]=(h+f+e)<<move_seg4|BIT2;break;
+      case '3':  LCDMEM[segment1]=(a+b+c+d+k)<<move_seg1;   LCDMEM[segment2]=(e+h+o)>>move_seg2;       LCDMEM[segment3]=(k)>>move_seg3;   LCDMEM[segment4]=(h+e)<<move_seg4|BIT2;  break;
+      case '4':  LCDMEM[segment1]=(b+c+k)<<move_seg1;       LCDMEM[segment2]=(g+o)>>move_seg2;         LCDMEM[segment3]=(k)>>move_seg3;   LCDMEM[segment4]=(g)<<move_seg4|BIT2;break;
+      case '5':  LCDMEM[segment1]=(a+c+d+k)<<move_seg1;     LCDMEM[segment2]=(h+g+e+o)>>move_seg2;     LCDMEM[segment3]=(k)>>move_seg3;   LCDMEM[segment4]=(h+g+e)<<move_seg4|BIT2;break;
+      case '6':  LCDMEM[segment1]=(a+c+d+k)<<move_seg1;     LCDMEM[segment2]=(h+g+f+e+o)>>move_seg2;   LCDMEM[segment3]=(k)>>move_seg3;   LCDMEM[segment4]=(h+g+f+e)<<move_seg4|BIT2;break;
+      case '7':  LCDMEM[segment1]=(a+b+c)<<move_seg1;       LCDMEM[segment2]=(h+o)>>move_seg2;         break;
+      case '8':  LCDMEM[segment1]=(a+b+c+d+k)<<move_seg1;   LCDMEM[segment2]=(e+f+g+h+o)>>move_seg2;   LCDMEM[segment3]=(k)>>move_seg3;   LCDMEM[segment4]=(e+f+g+h)<<move_seg4|BIT2;break;
+      case '9':  LCDMEM[segment1]=(a+b+c+d+k)<<move_seg1;   LCDMEM[segment2]=(h+g+e+o)>>move_seg2;     LCDMEM[segment3]=(k)>>move_seg3;   LCDMEM[segment4]=(h+g+e)<<move_seg4|BIT2;break;
+      case '0':  LCDMEM[segment1]=(a+b+c+d+k)<<move_seg1;   LCDMEM[segment2]=(e+f+g+h+o)>>move_seg2;   LCDMEM[segment3]=(k)>>move_seg3;   LCDMEM[segment4]=(e+f+g+h)<<move_seg4|BIT2;break;
+      }  */  
+}
+

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<workspace>
+  <project>
+    <path>$WS_DIR$\..\PR\gsm.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\..\Regulator kot&#x142;a CO\kociol.ewp</path>
+  </project>
+  <project>
+    <path>$WS_DIR$\Project_gsm.ewp</path>
+  </project>
+  <batchBuild/>
+</workspace>
+
+

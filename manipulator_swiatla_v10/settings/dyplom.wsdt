@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<Workspace>
+  <ConfigDictionary>
+    
+  <CurrentConfigs><Project>dyplom/Debug</Project></CurrentConfigs></ConfigDictionary>
+  <Desktop>
+    <Static>
+      <Workspace>
+        <ColumnWidths>
+          
+          
+          
+          
+        <Column0>269</Column0><Column1>27</Column1><Column2>27</Column2><Column3>27</Column3></ColumnWidths>
+      </Workspace>
+      <Build>
+        
+        
+        
+        
+      <ColumnWidth0>20</ColumnWidth0><ColumnWidth1>916</ColumnWidth1><ColumnWidth2>244</ColumnWidth2><ColumnWidth3>61</ColumnWidth3></Build>
+      <TerminalIO/>
+    <Disassembly><MixedMode>1</MixedMode><CodeCovShow>0</CodeCovShow></Disassembly><Debug-Log/></Static>
+    <Windows>
+      
+      
+    <Wnd1>
+        <Tabs>
+          <Tab>
+            <Identity>TabID-27250-27338</Identity>
+            <TabName>Workspace</TabName>
+            <Factory>Workspace</Factory>
+            <Session>
+              
+            <NodeDict><ExpandedNode>dyplom</ExpandedNode><ExpandedNode>dyplom/i2c.c</ExpandedNode></NodeDict></Session>
+          </Tab>
+        </Tabs>
+        
+      <SelectedTab>0</SelectedTab></Wnd1><Wnd3>
+        <Tabs>
+          <Tab>
+            <Identity>TabID-6046-27531</Identity>
+            <TabName>Build</TabName>
+            <Factory>Build</Factory>
+            <Session/>
+          </Tab>
+        <Tab><Identity>TabID-15386-28505</Identity><TabName>Debug Log</TabName><Factory>Debug-Log</Factory><Session/></Tab></Tabs>
+        
+      <SelectedTab>1</SelectedTab></Wnd3></Windows>
+    <Editor>
+      
+      
+      
+      
+    <Pane><Tab><Factory>TextEditor</Factory><Filename>F:\##projekty\iar\#dyplom_manipulator_swiatla\wait.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>65</SelStart><SelEnd>68</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>F:\##projekty\iar\#dyplom_manipulator_swiatla\swiatla.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>175</SelStart><SelEnd>175</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>F:\##projekty\iar\#dyplom_manipulator_swiatla\swiatla.c</Filename><XPos>0</XPos><YPos>77</YPos><SelStart>1364</SelStart><SelEnd>1364</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>F:\##projekty\iar\#dyplom_manipulator_swiatla\motor.c</Filename><XPos>0</XPos><YPos>72</YPos><SelStart>1872</SelStart><SelEnd>1872</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>F:\##projekty\iar\#dyplom_manipulator_swiatla\motor.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>179</SelStart><SelEnd>186</SelEnd></Tab><ActiveTab>4</ActiveTab><Tab><Factory>TextEditor</Factory><Filename>F:\##projekty\iar\#dyplom_manipulator_swiatla\i2c.h</Filename><XPos>0</XPos><YPos>41</YPos><SelStart>1220</SelStart><SelEnd>1239</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>C:\Program Files\IAR Systems\Embedded Workbench Evaluation 5.0\430\inc\msp430x12x.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>F:\##projekty\iar\#dyplom_manipulator_swiatla\i2c.c</Filename><XPos>0</XPos><YPos>132</YPos><SelStart>3349</SelStart><SelEnd>3349</SelEnd></Tab><Tab><Factory>TextEditor</Factory><Filename>F:\##projekty\iar\#dyplom_manipulator_swiatla\wait.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>561</SelStart><SelEnd>561</SelEnd></Tab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
+    <Positions>
+      
+      
+      
+      
+      
+    <Top><Row0><Sizes><Toolbar-012f8818><key>iaridepm.enu1</key></Toolbar-012f8818></Sizes></Row0></Top><Left><Row0><Sizes><Wnd1><Rect><Top>-2</Top><Left>-2</Left><Bottom>616</Bottom><Right>343</Right><x>-2</x><y>-2</y><xscreen>345</xscreen><yscreen>361</yscreen><sizeHorzCX>269531</sizeHorzCX><sizeHorzCY>376827</sizeHorzCY><sizeVertCX>269531</sizeVertCX><sizeVertCY>645094</sizeVertCY></Rect></Wnd1></Sizes></Row0></Left><Right><Row0><Sizes/></Row0></Right><Bottom><Row0><Sizes><Wnd3><Rect><Top>-2</Top><Left>-2</Left><Bottom>298</Bottom><Right>1282</Right><x>-2</x><y>-2</y><xscreen>1284</xscreen><yscreen>300</yscreen><sizeHorzCX>1003125</sizeHorzCX><sizeHorzCY>313152</sizeHorzCY><sizeVertCX>269531</sizeVertCX><sizeVertCY>376827</sizeVertCY></Rect></Wnd3></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
+  </Desktop>
+</Workspace>
+
+

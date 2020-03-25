@@ -1,0 +1,18 @@
+Removed Pin From Net: NetName=L Pin=C1-1
+Removed Pin From Net: NetName=N Pin=P1-2
+Removed Pin From Net: NetName=L Pin=Q1-1
+Removed Pin From Net: NetName=GND Pin=Q3-2
+Removed Pin From Net: NetName=3V3 Pin=R1-1
+Removed Pin From Net: NetName=IN_6 Pin=R5-1
+Removed Pin From Net: NetName=GND Pin=R9-1
+Removed Member From Class: ClassName=sterowanie_v1_1 Member=C1
+Removed Member From Class: ClassName=sterowanie_v1_1 Member=P1
+Removed Member From Class: ClassName=sterowanie_v1_1 Member=Q1
+Removed Member From Class: ClassName=sterowanie_v1_1 Member=Q3
+Removed Member From Class: ClassName=sterowanie_v1_1 Member=R1
+Removed Member From Class: ClassName=sterowanie_v1_1 Member=R2
+Removed Member From Class: ClassName=sterowanie_v1_1 Member=R5
+Removed Member From Class: ClassName=sterowanie_v1_1 Member=R6
+Removed Member From Class: ClassName=sterowanie_v1_1 Member=R9
+Removed Member From Class: ClassName=sterowanie_v1_1 Member=U1
+Added Room: Name=sterowanie_v1_1

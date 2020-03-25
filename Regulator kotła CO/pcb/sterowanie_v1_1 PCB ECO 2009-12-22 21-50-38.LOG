@@ -1,0 +1,4 @@
+Added Component: Designator=P7(ZASILANIE_DUZE)
+Added Pin To Net: NetName=L Pin=P7-1
+Added Pin To Net: NetName=N Pin=P7-2
+Added Member To Class: ClassName=sterowanie_v1_1 Member=Component P7 Header 2

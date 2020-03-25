@@ -1,0 +1,27 @@
+/*
+Program przyk³adowy dla p³ytki ewaluacyjnej eMeSPek
+
+  Autor: Sylwester Nowocieñ
+         rev 1.0
+         17.04.2008
+         CONTRANS TI
+*/
+#include "io430.h"
+
+void main( void )
+{
+
+  WDTCTL = WDTPW + WDTHOLD;     // Zatrzymanie watchdog-a
+
+  P1DIR &= ~(BIT2|BIT3);        // linie P2.0 i P2.1 jako wejœcie
+  P2DIR |=   BIT2|BIT3;        // linie P1.2 i P1.3 jako wyjœcie
+
+  while(1)
+  {
+    if((P1IN&BIT3)==0x00)     // jezeli wciœniêto klawisz S2
+      P2OUT ^= BIT2;          // zmieñ stan LED2 na przeciwny
+    if((P1IN&BIT2)==0x00)     // jezeli wciœniêto klawisz S1
+      P2OUT ^= BIT3;          // zmieñ stan LED1 na przeciwny
+    for(unsigned int i=0;i<20000;i++);//opó¿nienie czytania klawiszy ~20ms
+  }
+}

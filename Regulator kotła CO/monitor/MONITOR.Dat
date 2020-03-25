@@ -1,0 +1,13 @@
+Field=Comment~String~Comment~100|Field=Description~String~Description~100|Field=Designator~String~Designator~100|Field=Footprint~String~Footprint~100|Field=LibRef~String~LibRef~100|Field=Quantity~Integer~Quantity~100|ReportField=ProjectFileName~MONITOR.PRJPCB|ReportField=ProjectFullPath~F:\##projekty\iar\Regulator kot³a CO\monitor\MONITOR.PRJPCB|ReportField=Title~Bill of Materials (By PartType) For Project [MONITOR.PRJPCB] (No PCB Document Selected)|ReportField=TotalQuantity~28|ReportField=ReportTime~20:20:53|ReportField=ReportDate~2009-12-15|ReportField=ReportDateTime~2009-12-15 20:20:53|ReportField=OutputName~Bill of Materials (By PartType)|ReportField=OutputType~BOM_PartType|ReportField=GeneratorName~BOM|ReportField=GeneratorDescription~Bill of Materials|ReportField=VariantName~None|ReportField=Address1~|ReportField=Address2~|ReportField=Address3~|ReportField=Address4~|ReportField=ApprovedBy~|ReportField=Author~|ReportField=CheckedBy~|ReportField=CompanyName~|ReportField=CurrentDate~2009-12-15|ReportField=CurrentTime~20:20:53|ReportField=Date~|ReportField=DocumentFullPathAndName~F:\##projekty\iar\Regulator kot³a CO\monitor\monitor.SchDoc|ReportField=DocumentName~monitor.SchDoc|ReportField=DocumentNumber~|ReportField=DrawnBy~|ReportField=Engineer~|ReportField=ImagePath~|ReportField=ModifiedDate~2009-12-06|ReportField=Organization~|ReportField=Revision~|ReportField=Rule~|ReportField=SheetNumber~|ReportField=SheetTotal~|ReportField=Time~|ReportField=Title~|ReportField=DataSourceFileName~MONITOR.PRJPCB|ReportField=DataSourceFullPath~F:\##projekty\iar\Regulator kot³a CO\monitor\MONITOR.PRJPCB
+Cap Pol3|Polarized Capacitor (Surface Mount)|C1, C2, C3, C4, C5, C9|3225[1210]|Cap Pol3|6
+Cap|Capacitor|C6, C7, C11, C12|3216[1206]|Cap|4
+Cap Pol3|Polarized Capacitor (Surface Mount)|C8, C10|6332[2512]|Cap Pol3|2
+IN|Header, 2-Pin|P1|HDR1X2|Header 2|1
+GAIN 22k|Header, 2-Pin|P2|HDR1X2|Header 2|1
+VOL1 10k|Header, 3-Pin|P3|HDR1X3|Header 3|1
+OUT1|Header, 2-Pin|P4|HDR1X2|Header 2|1
+VOL2 10k|Header, 3-Pin|P5|HDR1X3|Header 3|1
+OUT2|Header, 2-Pin|P6|HDR1X2|Header 2|1
+Res3|Resistor|R1, R2, R3, R4, R5, R6, R7|3216[1206]|Res3|7
+NE5534D|Low-Noise Operational Amplifier|U1|D008|NE5534D|1
+LM386M-1|Low-Voltage Audio Power Amplifier|U2, U3|M08A|LM386M-1|2

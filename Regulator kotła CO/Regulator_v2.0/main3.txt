@@ -1,0 +1,172 @@
+/******************************************************************
+#define D8    BIT7//P1,7
+#define D7    BIT6//P1,6
+#define D6    BIT5//P1,5
+#define D5    BIT4//P1.4
+#define E     BIT2//P1,2
+#define RS    BIT1//P1,1
+                                                      *****
+ ******************************************************************/
+
+#include  <msp430x13x.h>
+
+
+
+// Definicje wyprowadzeñ
+#define LCD_PORT P1OUT
+#define LCD_DDR  P1DIR
+#define LCD_RS 1
+#define LCD_E 2
+
+
+#define LCD_D4 4 // D5, D6, D7 - po³¹czone kolejno
+
+// Komendy steruj¹ce wyœwietlaczem
+#define LCDC_CLS		0x01
+#define LCDC_HOME		0x02
+#define LCDC_MODE		0x04
+	#define LCDC_MODER		0x02
+	#define LCDC_MODEL		0
+	#define LCDC_MODEMOVE	0x01
+#define LCDC_ON 		0x08
+	#define LCDC_ONDISPLAY	0x04
+	#define LCDC_ONCURSOR	0x02
+	#define LCDC_ONBLINK	0x01
+#define LCDC_SHIFT		0x10
+	#define LCDC_SHIFTDISP	0x08
+	#define LCDC_SHIFTR		0x04
+	#define LCDC_SHIFTL		0
+#define LCDC_FUNC		0x20
+	#define LCDC_FUNC8b		0x10
+	#define LCDC_FUNC4b		0
+	#define LCDC_FUNC2L		0x08
+	#define LCDC_FUNC1L		0
+	#define LCDC_FUNC5x10	0x4
+	#define LCDC_FUNC5x7	0
+#define LCDC_CGA		0x40
+#define LCDC_DDA		0x80
+
+//--------------------------------------------------
+#define   _100us     7                 //7 cycles *12 + 20 = 104 / 104*1us = 104us
+
+void Delay(unsigned int a)
+{
+  unsigned char k;
+  for (k=0 ; k != a; ++k);                      //20+a*12 cycles (for 1MHz)
+}
+
+void delay100us(unsigned char b)
+{
+  unsigned char j;
+  for (j=0; j!=b; ++j) Delay (_100us);
+}
+
+
+// Koniec opóŸnieñ
+//--------------------------------------------------
+
+//--------------------------------------------------
+// Obs³uga wyœwietlacza
+// Funkcje niskiego poziomu
+#define LCD_EPULSE() {LCD_PORT |= 1<<LCD_E; delay100us(3); LCD_PORT &= ~(1<<LCD_E);}
+
+void LCDsendHalf(unsigned char data)
+{
+	data = (data & 0x0F) << LCD_D4; 
+	//data |= 0xF0;
+	//data &= 0x0F;
+	//data <<= LCD_D4; 
+	LCD_PORT = (LCD_PORT & ~(0x0F<<LCD_D4)) | data;
+	//PORT(LCD_DPORT) &= ~(0x0F<<LCD_D4); 
+	//PORT(LCD_DPORT) |= data; 
+	LCD_EPULSE();
+}
+
+void LCDsend(unsigned char data)
+{
+	// Starsza czêœæ
+	LCDsendHalf(data>>4);
+	// M³odsza czêœæ
+	LCDsendHalf(data);
+	delay100us(1);
+}
+
+// Funkcje interfejsu
+void LCDcommand(unsigned char command)
+{
+	LCD_PORT &= ~(1<<LCD_RS);
+	LCDsend(command);
+}
+
+void LCDdata(unsigned char data)
+{
+	LCD_PORT |= 1<<LCD_RS;
+	LCDsend(data);
+}
+
+void LCDcls(void)
+{
+	LCDcommand(LCDC_CLS);
+	delay100us(48);
+}
+
+void LCDhome(void)
+{
+	LCDcommand(LCDC_HOME);
+	delay100us(48);
+}
+
+void LCDinit(void)
+{
+	delay100us(150);
+	LCD_PORT &= ~(1<<LCD_RS);
+	LCDsendHalf(LCDC_FUNC|LCDC_FUNC8b); 
+	delay100us(41);
+	LCDsendHalf(LCDC_FUNC|LCDC_FUNC8b);
+	delay100us(2);
+	LCDsendHalf(LCDC_FUNC|LCDC_FUNC4b);
+	delay100us(2);
+	// Teraz jest ju¿ 4b. Koniec korzystania z sendHalf
+	LCDcommand(LCDC_FUNC|LCDC_FUNC4b|LCDC_FUNC2L|LCDC_FUNC5x7);
+	LCDcommand(LCDC_ON);
+	LCDcls();
+	LCDcommand(LCDC_MODE|LCDC_MODER);
+	LCDcommand(LCDC_ON|LCDC_ONDISPLAY|LCDC_ONCURSOR);
+}
+
+// Koniec obs³ugi wyœwietlacza
+//--------------------------------------------------
+
+// START
+int main(void)
+{
+	//----------------------------------------------
+	// Inicjacja - uwaga: uproszczona, mo¿e wymagaæ 
+	// zmian przy zmianie przyporz¹dkowania portów
+	LCD_DDR = 1<<LCD_E | 1<<LCD_RS | (0x0F<<LCD_D4);
+	
+	LCDinit();
+	// Koniec inicjacji
+	//----------------------------------------------
+	
+	// \/ Bez tego, czasami zerowanie z poziomu programatora
+	// \/ powoduje œmieci na wyœwietlaczu. 
+	LCDcls(); 
+	
+	LCDdata('H');
+	LCDdata('E');
+	LCDdata('L');
+	LCDdata('L');
+	LCDdata('O');
+	LCDdata(' ');
+	LCDdata(':');
+	LCDdata('-');
+	LCDdata(')');
+        while(1)
+        {
+        delay100us(1);
+    
+        
+        }
+
+}
